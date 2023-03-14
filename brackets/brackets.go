@@ -1,27 +1,22 @@
-package main
+package brackets
 
 import (
-	"fmt"
 	"strings"
 
-	"github.com/dknight/algo-ads/stack"
+	"github.com/dknight/algos/stack"
 )
 
-var (
-	input    = "{()([]{})}{}()()"
-	mappings = map[string]string{
-		"(": ")",
-		"[": "]",
-		"{": "}",
-	}
-)
-
-func main() {
-	result := BracketsProblemResolver(input)
-	fmt.Println(result)
+var openCloseMap = map[string]string{
+	"(": ")",
+	"[": "]",
+	"{": "}",
 }
 
-func BracketsProblemResolver(input string) bool {
+// AreBalanced checks that brackets are balanced or not.
+func AreBalanced(input string) bool {
+	if len(input) == 0 {
+		return false
+	}
 	stk := stack.New[string]()
 	ss := strings.Split(input, "")
 	for _, s := range ss {
@@ -34,12 +29,12 @@ func BracketsProblemResolver(input string) bool {
 		}
 		if s == ")" || s == "]" || s == "}" {
 			last := stk.Pop()
-			for o, c := range mappings {
+			for o, c := range openCloseMap {
 				if last != o && s == c {
 					return false
 				}
 			}
 		}
 	}
-	return (stk.Len() == 0)
+	return stk.Len() == 0
 }

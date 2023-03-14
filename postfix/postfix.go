@@ -1,32 +1,32 @@
-package main
+package postfix
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 
-	"github.com/dknight/algo-ads/stack"
+	"github.com/dknight/algos/stack"
 )
 
-type PostfixNotation string
+// Notation represents postfix notation string.
+type Notation string
 
-func (pn PostfixNotation) Parse() []string {
-	ss := strings.Fields(string(pn))
-	return ss
+// Parse postfix notation expression into numbers and operands.
+func (pn Notation) Parse() []string {
+	return strings.Fields(string(pn))
 }
 
-func (pn PostfixNotation) Calculate() float64 {
+// Calculate the expression of the postfix notations.
+func (pn Notation) Calculate() float64 {
 	result := 0.0
 	stk := stack.New[float64]()
 	for _, s := range pn.Parse() {
-		x, err := strconv.ParseFloat(s, 32)
+		x, err := strconv.ParseFloat(s, 64)
 		if err != nil {
 			if !isOperand(s) {
 				panic("Parse error")
 			}
 			a := stk.Pop()
 			b := stk.Pop()
-			// fmt.Println(x, s, y)
 			switch s {
 			case "-":
 				result = b - a
@@ -49,15 +49,10 @@ func (pn PostfixNotation) Calculate() float64 {
 }
 
 func isOperand(s string) bool {
-	return (s == "-" || s == "+" || s == "/" || s == "*")
-}
-
-var (
-	input = "1 2 3 * + 2 - 10 3 4 / 5 + 1 +"
-)
-
-func main() {
-	s := PostfixNotation(input)
-	result := s.Calculate()
-	fmt.Println(result)
+	switch s {
+	case "-", "+", "/", "*":
+		return true
+	default:
+		return false
+	}
 }
