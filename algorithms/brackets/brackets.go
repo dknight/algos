@@ -3,7 +3,7 @@ package brackets
 import (
 	"strings"
 
-	"github.com/dknight/algos/stack"
+	"github.com/dknight/algos/structures/stack"
 )
 
 var openCloseMap = map[string]string{

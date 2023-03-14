@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/dknight/algos/stack"
+	"github.com/dknight/algos/structures/stack"
 )
 
 // Notation represents postfix notation string.
