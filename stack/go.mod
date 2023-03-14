@@ -1,3 +1,3 @@
-module github.com/dknight/algo-ads/stack
+module github.com/dknight/algos/stack
 
 go 1.19
