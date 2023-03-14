@@ -1,8 +1,7 @@
 # Collection of algorithms and data structures written in Go.
 
-For personal use. DO NOT RELY ON THIS CODE.
-
-TODO: write warning
+For personal use. DO NOT RELY ON THIS CODE, every mitute everything can be
+changed.
 
 ## Data structures
 
@@ -14,7 +13,9 @@ TODO: write warning
 * Postfix notation
 * Balanced brackets
 
-More will be implemented soon
+# TODO
+
+More will be implemented soon.
 
 # LICENSE
 
