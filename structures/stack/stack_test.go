@@ -1,19 +1,25 @@
 package stack
 
 import (
-	"sync"
+	"reflect"
 	"testing"
 )
 
+func assertPanic(t *testing.T, fn func()) {
+	t.Helper()
+	defer func() { _ = recover() }()
+	fn()
+	t.Errorf("should have panicked")
+}
+
 func TestStack(t *testing.T) {
-	t.Run("New()", func(t *testing.T) {
-		t.Parallel()
+	t.Run("TestStackNew()", func(t *testing.T) {
 		s := New[any]()
 		if s == nil {
 			t.Error("Cannot create stack")
 		}
 	})
-	t.Run("Len()", func(t *testing.T) {
+	t.Run("TestStackLen()", func(t *testing.T) {
 		s := New[any]()
 		exp := 0
 		got := s.Len()
@@ -21,7 +27,7 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("Push()", func(t *testing.T) {
+	t.Run("TestStackPush()", func(t *testing.T) {
 		s := New[int]()
 		s.Push(1, 2, 3)
 		got := s.Len()
@@ -30,7 +36,7 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("Peek()", func(t *testing.T) {
+	t.Run("TestStackPeek()", func(t *testing.T) {
 		s := New[string]()
 		s.Push("boo", "moo")
 		exp := "moo"
@@ -38,11 +44,12 @@ func TestStack(t *testing.T) {
 		if exp != got {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
-
-		// sEmpt := New[string]()
-		// got = sEmpt.Peek()
 	})
-	t.Run("Pop()", func(t *testing.T) {
+	t.Run("TestStackEmptyPeek()", func(t *testing.T) {
+		s := New[string]()
+		assertPanic(t, func() { s.Peek() })
+	})
+	t.Run("TestStackPop()", func(t *testing.T) {
 		s := New[string]()
 		s.Push("boo", "moo")
 		got := s.Pop()
@@ -57,9 +64,9 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 
-		// got = s.Pop()
+		assertPanic(t, func() { s.Pop() })
 	})
-	t.Run("Empty()", func(t *testing.T) {
+	t.Run("TestStackEmpty()", func(t *testing.T) {
 		s := New[string]()
 		exp := true
 		got := s.Empty()
@@ -74,45 +81,37 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-}
-
-func TestStackAsync(t *testing.T) {
-	t.Run("Async Push", func(t *testing.T) {
-		n := 10
+	t.Run("TestStackReset()", func(t *testing.T) {
 		s := New[int]()
-		for i := 0; i < n; i++ {
-			go func(i int) {
-				s.Push(i)
-
-			}(i)
+		s.Push(1, 2, 3, 4, 5)
+		exp := 5
+		got := s.Len()
+		if exp != got {
+			t.Errorf("Expected %v got %v\n", exp, got)
+		}
+		s.Reset()
+		exp = 0
+		got = s.Len()
+		if exp != got {
+			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("Async Pop/Len", func(t *testing.T) {
+	t.Run("TestStackDump()", func(t *testing.T) {
 		s := New[int]()
-		var wg sync.WaitGroup
-		wg.Add(s.Len())
-
-		for i := 0; i < s.Len(); i++ {
-			go func(i int) {
-				s.Push(i)
-
-			}(i)
+		s.Push(1, 2, 3, 4, 5)
+		exp := []int{1, 2, 3, 4, 5}
+		got := s.Dump()
+		if !reflect.DeepEqual(exp, got) {
+			t.Errorf("Expected %v got %v\n", exp, got)
 		}
-
-		for i := 0; i < s.Len(); i++ {
-			go func() {
-				s.Pop()
-				wg.Done()
-			}()
+	})
+	t.Run("TestStackString()", func(t *testing.T) {
+		s := New[int]()
+		s.Push(11, 22, 33, 44)
+		exp := "[11 22 33 44]"
+		got := s.String()
+		if exp != got {
+			t.Errorf("Expected %v got %v\n", exp, got)
 		}
-
-		go func() {
-			wg.Wait()
-			exp := 0
-			got := s.Len()
-			if exp != got {
-				t.Errorf("Expected %v got %v\n", exp, got)
-			}
-		}()
 	})
 }
