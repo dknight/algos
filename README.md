@@ -5,7 +5,9 @@ changed.
 
 ## Data structures
 
-* Stack (thread-safe)
+All data structures are **not thread-safe**.
+
+* Stack
 
 ## Algorithms
 
