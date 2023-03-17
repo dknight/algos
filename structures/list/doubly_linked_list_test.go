@@ -11,10 +11,26 @@ func TestList(t *testing.T) {
 			t.Error("List should not be nil")
 		}
 	})
+
 	t.Run("DoublyLikedList_Len()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		if li.Len() != 0 {
 			t.Error("List should not be nil")
+		}
+	})
+
+	t.Run("DoublyLikedList_Empty()", func(t *testing.T) {
+		li := NewDoublyLikedList[int]()
+		exp := true
+		got := li.Empty()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+		li.PushBack(1)
+		exp = false
+		got = li.Empty()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
 		}
 	})
 

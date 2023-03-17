@@ -120,3 +120,8 @@ func (li *DoublyLinkedList[T]) Remove(node *DoublyLinkedNode[T]) bool {
 func (li *DoublyLinkedList[T]) Len() int {
 	return li.length
 }
+
+// Empty checks that list is empty.
+func (li *DoublyLinkedList[T]) Empty() bool {
+	return li.length == 0
+}
