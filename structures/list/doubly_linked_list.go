@@ -1,6 +1,7 @@
 package list
 
 // DoublyLinkedNode of the doubly linked list.
+// TODO comparable may not be equal of using structs.
 type DoublyLinkedNode[T comparable] struct {
 	next, prev *DoublyLinkedNode[T]
 	list       *DoublyLinkedList[T]

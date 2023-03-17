@@ -1,6 +1,7 @@
 package list
 
 // Node represents the node in linked in.
+// TODO comparable may not be equal of using structs.
 type Node[T comparable] struct {
 	value T
 	next  *Node[T]

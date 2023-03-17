@@ -262,4 +262,20 @@ func TestList(t *testing.T) {
 			t.Errorf("Expected %v got %v", 0, li.Len())
 		}
 	})
+
+	t.Run("DoublyLikedList_SearchByValue()_Struct", func(t *testing.T) {
+		type TestPerson struct {
+			Name string
+			Aga  int
+		}
+		p1 := TestPerson{"Toby", 25}
+		p2 := TestPerson{"Toby", 25}
+
+		li := NewDoublyLikedList[TestPerson]()
+		li.PushFront(p1)
+		found := li.FindByValue(p2)
+		if p1.Name != found.Value().Name {
+			t.Errorf("Expected %v got %v", p2, found.Value())
+		}
+	})
 }
