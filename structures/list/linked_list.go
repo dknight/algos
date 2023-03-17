@@ -1,6 +1,8 @@
 package list
 
-import "reflect"
+import (
+	"reflect"
+)
 
 // Node represents the node in linked in.
 type Node[T any] struct {
@@ -49,21 +51,27 @@ func (li *LinkedList[T]) Push(v T) *Node[T] {
 }
 
 // Removes the first found node by value fron linked list.
-func (li *LinkedList[T]) Remove(v T) bool {
-	if li.head == nil {
-		return false
+func (li *LinkedList[T]) Remove(v T) *Node[T] {
+	var prev *Node[T]
+	node := li.head
+	if node != nil && reflect.DeepEqual(node.Value(), v) {
+		li.head = node.next
+		li.length--
+		return node
 	}
-	prev := li.head
-	for node := li.Head(); node != nil; node = node.Next() {
-		if reflect.DeepEqual(node.Value(), v) {
-			prev.next = node.next
-			node.next = nil
-			li.length--
-			return true
-		}
+
+	for node != nil && !reflect.DeepEqual(node.Value(), v) {
 		prev = node
+		node = node.next
 	}
-	return false
+
+	if node == nil {
+		return nil
+	}
+
+	prev.next = node.next
+	li.length--
+	return node
 }
 
 // Head returns the head (firstly added node) of the linked list.
