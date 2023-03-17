@@ -9,7 +9,7 @@ type DoublyLinkedNode[T any] struct {
 	value      T
 }
 
-// Next is the next iterator for the node. Retrives the next node.
+// Next is the next iterator for the node. Retrieves the next node.
 func (n *DoublyLinkedNode[T]) Next() *DoublyLinkedNode[T] {
 	if nxt := n.next; n.list != nil && nxt != &n.list.root {
 		return nxt
@@ -17,7 +17,7 @@ func (n *DoublyLinkedNode[T]) Next() *DoublyLinkedNode[T] {
 	return nil
 }
 
-// Prev is the previous iterator for the node. Retrives the previous node.
+// Prev is the previous iterator for the node. Retrieves the previous node.
 func (n *DoublyLinkedNode[T]) Prev() *DoublyLinkedNode[T] {
 	if prv := n.prev; n.list != nil && prv != &n.list.root {
 		return prv
@@ -116,7 +116,7 @@ func (li *DoublyLinkedList[T]) Remove(node *DoublyLinkedNode[T]) bool {
 	return true
 }
 
-// Len returns the lenght of the list.
+// Len returns the length of the list.
 func (li *DoublyLinkedList[T]) Len() int {
 	return li.length
 }

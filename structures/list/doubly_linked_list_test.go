@@ -5,27 +5,27 @@ import (
 )
 
 func TestList(t *testing.T) {
-	t.Run("TestListNew()", func(t *testing.T) {
+	t.Run("NewDoublyLikedList()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		if li == nil {
 			t.Error("List should not be nil")
 		}
 	})
-	t.Run("TestListLen()", func(t *testing.T) {
+	t.Run("DoublyLikedList_Len()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		if li.Len() != 0 {
 			t.Error("List should not be nil")
 		}
 	})
 
-	t.Run("TestListBack_Empty()", func(t *testing.T) {
+	t.Run("DoublyLikedList_Back() _Empty()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		got := li.Back()
 		if got != nil {
 			t.Errorf("Expected %v got %v", nil, got)
 		}
 	})
-	t.Run("TestListBack()", func(t *testing.T) {
+	t.Run("DoublyLikedList_Back()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		li.PushBack(111)
 		expBack := 111
@@ -46,14 +46,14 @@ func TestList(t *testing.T) {
 		}
 	})
 
-	t.Run("TestListFront_Empty()", func(t *testing.T) {
+	t.Run("DoublyLinkedList_Front_Empty()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		got := li.Front()
 		if got != nil {
 			t.Errorf("Expected %v got %v", nil, got)
 		}
 	})
-	t.Run("TestListFront()", func(t *testing.T) {
+	t.Run("DoublyLinkedList_Front()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		li.PushFront(111)
 		expFront := 111
@@ -80,7 +80,7 @@ func TestList(t *testing.T) {
 		}
 	})
 
-	t.Run("NodeNext()", func(t *testing.T) {
+	t.Run("DoublyLinkedNode_Next()", func(t *testing.T) {
 		ranks := []string{
 			"private", "corporal", "sergeant", "lieutenant",
 		}
@@ -103,7 +103,7 @@ func TestList(t *testing.T) {
 			}
 		}
 	})
-	t.Run("NodePrev()", func(t *testing.T) {
+	t.Run("DoublyLinkedNode_Prev()", func(t *testing.T) {
 		ranks := []string{
 			"private", "corporal", "sergeant", "lieutenant",
 		}
@@ -127,7 +127,7 @@ func TestList(t *testing.T) {
 		}
 	})
 
-	t.Run("FindByValue()", func(t *testing.T) {
+	t.Run("DoublyLikedList_FindByValue()", func(t *testing.T) {
 		ranks := []string{
 			"private", "corporal", "sergeant", "lieutenant",
 		}
@@ -142,7 +142,7 @@ func TestList(t *testing.T) {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 	})
-	t.Run("FindByValue_Empty()", func(t *testing.T) {
+	t.Run("DoublyLikedList_FindByValue_Empty()", func(t *testing.T) {
 		li := NewDoublyLikedList[string]()
 		got := li.FindByValue("Bambarbia")
 		if got != nil {
@@ -150,7 +150,7 @@ func TestList(t *testing.T) {
 		}
 	})
 
-	t.Run("Remove()", func(t *testing.T) {
+	t.Run("DoublyLikedList_Remove()", func(t *testing.T) {
 		li := NewDoublyLikedList[string]()
 		li.PushBack("Hello")
 		li.PushBack("World")
