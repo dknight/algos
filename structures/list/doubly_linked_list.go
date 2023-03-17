@@ -103,9 +103,9 @@ func (li *DoublyLinkedList[T]) FindByValue(cmp T) *DoublyLinkedNode[T] {
 }
 
 // Remove deletes node from the list.
-func (li *DoublyLinkedList[T]) Remove(node *DoublyLinkedNode[T]) bool {
+func (li *DoublyLinkedList[T]) Remove(node *DoublyLinkedNode[T]) *DoublyLinkedNode[T] {
 	if node == nil {
-		return false
+		return nil
 	}
 	node.prev.next = node.next
 	node.next.prev = node.prev
@@ -113,7 +113,26 @@ func (li *DoublyLinkedList[T]) Remove(node *DoublyLinkedNode[T]) bool {
 	node.prev = nil
 	node.list = nil
 	li.length--
-	return true
+	return node
+}
+
+// RemoveFront remove the node from the front of the list.
+func (li *DoublyLinkedList[T]) RemoveFront() *DoublyLinkedNode[T] {
+	node := li.root.next
+	if node == &li.root {
+		return nil
+	}
+	return li.Remove(node)
+
+}
+
+// RemoveBack remove the node from the front of the list.
+func (li *DoublyLinkedList[T]) RemoveBack() *DoublyLinkedNode[T] {
+	node := li.root.prev
+	if node == &li.root {
+		return nil
+	}
+	return li.Remove(node)
 }
 
 // Len returns the length of the list.

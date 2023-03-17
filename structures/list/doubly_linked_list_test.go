@@ -41,6 +41,7 @@ func TestList(t *testing.T) {
 			t.Errorf("Expected %v got %v", nil, got)
 		}
 	})
+
 	t.Run("DoublyLikedList_Back()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		li.PushBack(111)
@@ -69,6 +70,7 @@ func TestList(t *testing.T) {
 			t.Errorf("Expected %v got %v", nil, got)
 		}
 	})
+
 	t.Run("DoublyLinkedList_Front()", func(t *testing.T) {
 		li := NewDoublyLikedList[int]()
 		li.PushFront(111)
@@ -119,6 +121,7 @@ func TestList(t *testing.T) {
 			}
 		}
 	})
+
 	t.Run("DoublyLinkedNode_Prev()", func(t *testing.T) {
 		ranks := []string{
 			"private", "corporal", "sergeant", "lieutenant",
@@ -158,6 +161,7 @@ func TestList(t *testing.T) {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 	})
+
 	t.Run("DoublyLikedList_FindByValue_Empty()", func(t *testing.T) {
 		li := NewDoublyLikedList[string]()
 		got := li.FindByValue("Bambarbia")
@@ -175,13 +179,87 @@ func TestList(t *testing.T) {
 		}
 
 		found := li.FindByValue("Hello")
-		ok := li.Remove(found)
-		if li.Len() != 1 || !ok {
+		node := li.Remove(found)
+		if li.Len() != 1 && node == nil {
 			t.Errorf("Expected %v got %v", 1, li.Len())
 		}
-		ok = li.Remove(nil)
-		if ok {
-			t.Errorf("Expected %v got %v", false, ok)
+		node = li.Remove(nil)
+		if node != nil {
+			t.Errorf("Expected %v got %v", false, node)
+		}
+	})
+
+	t.Run("DoublyLikedList_RemoveFront()", func(t *testing.T) {
+		li := NewDoublyLikedList[string]()
+		li.PushBack("Hello")
+		li.PushBack("Fluffy")
+		li.PushBack("Kitty")
+
+		node := li.RemoveFront()
+		exp := "Hello"
+		got := node.Value()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		node = li.RemoveFront()
+		exp = "Fluffy"
+		got = node.Value()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		node = li.RemoveFront()
+		exp = "Kitty"
+		got = node.Value()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		node = li.RemoveFront()
+		if node != nil {
+			t.Errorf("Expected %v got %v", nil, node)
+		}
+
+		if li.Len() != 0 {
+			t.Errorf("Expected %v got %v", 0, li.Len())
+		}
+	})
+
+	t.Run("DoublyLikedList_RemoveBack()", func(t *testing.T) {
+		li := NewDoublyLikedList[string]()
+		li.PushBack("Hello")
+		li.PushBack("Fluffy")
+		li.PushBack("Kitty")
+
+		node := li.RemoveBack()
+		exp := "Kitty"
+		got := node.Value()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		node = li.RemoveBack()
+		exp = "Fluffy"
+		got = node.Value()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		node = li.RemoveBack()
+		exp = "Hello"
+		got = node.Value()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		node = li.RemoveBack()
+		if node != nil {
+			t.Errorf("Expected %v got %v", nil, node)
+		}
+
+		if li.Len() != 0 {
+			t.Errorf("Expected %v got %v", 0, li.Len())
 		}
 	})
 }
