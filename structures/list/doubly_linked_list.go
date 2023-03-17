@@ -1,9 +1,7 @@
 package list
 
-import "reflect"
-
 // DoublyLinkedNode of the doubly linked list.
-type DoublyLinkedNode[T any] struct {
+type DoublyLinkedNode[T comparable] struct {
 	next, prev *DoublyLinkedNode[T]
 	list       *DoublyLinkedList[T]
 	value      T
@@ -35,13 +33,13 @@ func (n *DoublyLinkedNode[T]) Value() T {
 // NOTE This list is created only for educational purposes and not recommenced
 // to use in production. If you need the linked lists structures it is better
 // to use https://pkg.go.dev/container/list
-type DoublyLinkedList[T any] struct {
+type DoublyLinkedList[T comparable] struct {
 	root   DoublyLinkedNode[T]
 	length int
 }
 
 // NewDoublyLikedList create a new doubly linked list.
-func NewDoublyLikedList[T any]() *DoublyLinkedList[T] {
+func NewDoublyLikedList[T comparable]() *DoublyLinkedList[T] {
 	li := &DoublyLinkedList[T]{}
 	li.root.next = &li.root
 	li.root.prev = &li.root
@@ -95,7 +93,7 @@ func (li *DoublyLinkedList[T]) Back() *DoublyLinkedNode[T] {
 // forwards direction. If not found the nil is returned.
 func (li *DoublyLinkedList[T]) FindByValue(cmp T) *DoublyLinkedNode[T] {
 	for node := li.Front(); node != nil; node = node.Next() {
-		if reflect.DeepEqual(node.Value(), cmp) {
+		if node.Value() == cmp {
 			return node
 		}
 	}

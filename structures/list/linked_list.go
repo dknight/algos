@@ -1,11 +1,7 @@
 package list
 
-import (
-	"reflect"
-)
-
 // Node represents the node in linked in.
-type Node[T any] struct {
+type Node[T comparable] struct {
 	value T
 	next  *Node[T]
 }
@@ -21,13 +17,13 @@ func (n *Node[T]) Value() T {
 }
 
 // LinkedList is a single linked list.
-type LinkedList[T any] struct {
+type LinkedList[T comparable] struct {
 	head, tail *Node[T]
 	length     int
 }
 
 // NewLinkedList create a new linked list.
-func NewLinkedList[T any]() *LinkedList[T] {
+func NewLinkedList[T comparable]() *LinkedList[T] {
 	return &LinkedList[T]{}
 }
 
@@ -54,13 +50,13 @@ func (li *LinkedList[T]) Push(v T) *Node[T] {
 func (li *LinkedList[T]) Remove(v T) *Node[T] {
 	var prev *Node[T]
 	node := li.head
-	if node != nil && reflect.DeepEqual(node.Value(), v) {
+	if node != nil && node.Value() == v {
 		li.head = node.next
 		li.length--
 		return node
 	}
 
-	for node != nil && !reflect.DeepEqual(node.Value(), v) {
+	for node != nil && node.Value() != v {
 		prev = node
 		node = node.next
 	}
