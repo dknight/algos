@@ -145,4 +145,19 @@ func TestLinkedList(t *testing.T) {
 			t.Errorf("Expected %v got %v", 0, li.Len())
 		}
 	})
+	t.Run("structs", func(t *testing.T) {
+		type Person struct {
+			Name string
+			Age  int
+		}
+		p := Person{"Dima", 37}
+		li := NewLinkedList[Person]()
+		li.Push(p)
+		li.Remove(p)
+		exp := 0
+		got := li.Len()
+		if got != exp {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+	})
 }
