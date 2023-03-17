@@ -1,8 +1,6 @@
 package list
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestList(t *testing.T) {
 	t.Run("NewDoublyLikedList()", func(t *testing.T) {

@@ -1,8 +1,6 @@
 package list
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestLinkedList(t *testing.T) {
 	t.Run("New()", func(t *testing.T) {
@@ -145,6 +143,25 @@ func TestLinkedList(t *testing.T) {
 			t.Errorf("Expected %v got %v", 0, li.Len())
 		}
 	})
+
+	t.Run("SearchByValue()", func(t *testing.T) {
+		li := NewLinkedList[int]()
+		li.Push(1)
+		li.Push(2)
+		li.Push(3)
+		found := li.FindByValue(2)
+		got := found.Value()
+		exp := 2
+		if got != exp {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		found = li.FindByValue(4)
+		if found != nil {
+			t.Errorf("Expected %v got %v", nil, got)
+		}
+	})
+
 	t.Run("structs", func(t *testing.T) {
 		type Person struct {
 			Name string

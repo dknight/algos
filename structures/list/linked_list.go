@@ -71,6 +71,16 @@ func (li *LinkedList[T]) Remove(v T) *Node[T] {
 	return node
 }
 
+// FindByValue search the node by it's value.
+func (li *LinkedList[T]) FindByValue(v T) *Node[T] {
+	for node := li.head; node != nil; node = node.Next() {
+		if node.Value() == v {
+			return node
+		}
+	}
+	return nil
+}
+
 // Head returns the head (firstly added node) of the linked list.
 func (li *LinkedList[T]) Head() *Node[T] {
 	return li.head
