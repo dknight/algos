@@ -13,13 +13,14 @@ func assertPanic(t *testing.T, fn func()) {
 }
 
 func TestStack(t *testing.T) {
-	t.Run("TestStackNew()", func(t *testing.T) {
+	t.Run("New()", func(t *testing.T) {
 		s := New[any]()
 		if s == nil {
 			t.Error("Cannot create stack")
 		}
 	})
-	t.Run("TestStackLen()", func(t *testing.T) {
+
+	t.Run("Len()", func(t *testing.T) {
 		s := New[any]()
 		exp := 0
 		got := s.Len()
@@ -27,7 +28,8 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("TestStackPush()", func(t *testing.T) {
+
+	t.Run("Push()", func(t *testing.T) {
 		s := New[int]()
 		s.Push(1, 2, 3)
 		got := s.Len()
@@ -36,20 +38,25 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("TestStackPeek()", func(t *testing.T) {
-		s := New[string]()
-		s.Push("boo", "moo")
-		exp := "moo"
-		got := s.Peek()
-		if exp != got {
-			t.Errorf("Expected %v got %v\n", exp, got)
-		}
+
+	t.Run("Peek()", func(t *testing.T) {
+		t.Run("Common", func(t *testing.T) {
+			s := New[string]()
+			s.Push("boo", "moo")
+			exp := "moo"
+			got := s.Peek()
+			if exp != got {
+				t.Errorf("Expected %v got %v\n", exp, got)
+			}
+		})
+
+		t.Run("Empty", func(t *testing.T) {
+			s := New[string]()
+			assertPanic(t, func() { s.Peek() })
+		})
 	})
-	t.Run("TestStackEmptyPeek()", func(t *testing.T) {
-		s := New[string]()
-		assertPanic(t, func() { s.Peek() })
-	})
-	t.Run("TestStackPop()", func(t *testing.T) {
+
+	t.Run("Pop()", func(t *testing.T) {
 		s := New[string]()
 		s.Push("boo", "moo")
 		got := s.Pop()
@@ -66,7 +73,8 @@ func TestStack(t *testing.T) {
 
 		assertPanic(t, func() { s.Pop() })
 	})
-	t.Run("TestStackEmpty()", func(t *testing.T) {
+
+	t.Run("Empty()", func(t *testing.T) {
 		s := New[string]()
 		exp := true
 		got := s.Empty()
@@ -81,7 +89,8 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("TestStackReset()", func(t *testing.T) {
+
+	t.Run("Reset()", func(t *testing.T) {
 		s := New[int]()
 		s.Push(1, 2, 3, 4, 5)
 		exp := 5
@@ -96,7 +105,8 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("TestStackDump()", func(t *testing.T) {
+
+	t.Run("Dump()", func(t *testing.T) {
 		s := New[int]()
 		s.Push(1, 2, 3, 4, 5)
 		exp := []int{1, 2, 3, 4, 5}
@@ -105,7 +115,8 @@ func TestStack(t *testing.T) {
 			t.Errorf("Expected %v got %v\n", exp, got)
 		}
 	})
-	t.Run("TestStackString()", func(t *testing.T) {
+
+	t.Run("String()", func(t *testing.T) {
 		s := New[int]()
 		s.Push(11, 22, 33, 44)
 		exp := "[11 22 33 44]"
