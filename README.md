@@ -14,6 +14,7 @@ example for lists it is better to use [lists from standard library](https://pkg.
 
 * Stack
 * Lists
+    - Linked List
     - Doubly Linked List
 
 ## Algorithms
