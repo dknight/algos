@@ -19,6 +19,10 @@ func (n *Node[T]) Value() T {
 }
 
 // LinkedList is a single linked list.
+//
+// NOTE This list is created only for educational purposes and not recommenced
+// to use in production. If you need the linked lists structures it is better
+// to use https://pkg.go.dev/container/list
 type LinkedList[T comparable] struct {
 	head, tail *Node[T]
 	length     int
@@ -29,36 +33,55 @@ func NewLinkedList[T comparable]() *LinkedList[T] {
 	return &LinkedList[T]{}
 }
 
-// Len returns the length of the linked list.
-func (li *LinkedList[T]) Len() int {
-	return li.length
-}
-
 // Push adds the value to the beginning of the list.
 func (li *LinkedList[T]) Push(v T) *Node[T] {
+	return li.InsertWithValue(v, li.tail)
+}
+
+// InsertWithValue creates a node with given value and inserts it after the
+// given node.
+func (li *LinkedList[T]) InsertWithValue(v T, after *Node[T]) *Node[T] {
 	node := &Node[T]{value: v}
-	if li.head == nil {
+	return li.InsertAfter(node, after)
+}
+
+// InsertAfter a node after a given node.
+func (li *LinkedList[T]) InsertAfter(node, after *Node[T]) *Node[T] {
+	li.length++
+	if after == nil {
 		li.head = node
 		li.tail = node
+		return node
+	}
+	if after != li.tail {
+		node.next = after.next
 	} else {
-		li.tail.next = node
 		li.tail = node
 	}
-	li.length++
+	after.next = node
 	return node
 }
 
-// Removes the first found node by value fron linked list.
-func (li *LinkedList[T]) Remove(v T) *Node[T] {
+// RemoveByValue the first found node by value fron linked list.
+func (li *LinkedList[T]) RemoveByValue(v T) *Node[T] {
+	node := li.FindByValue(v)
+	if node == nil {
+		return nil
+	}
+	return li.Remove(node)
+}
+
+// Remove removes the node from the linked list.
+func (li *LinkedList[T]) Remove(n *Node[T]) *Node[T] {
 	var prev *Node[T]
 	node := li.head
-	if node != nil && node.Value() == v {
+	if node != nil && n == node {
 		li.head = node.next
 		li.length--
 		return node
 	}
 
-	for node != nil && node.Value() != v {
+	for node != nil && n != node {
 		prev = node
 		node = node.next
 	}
@@ -66,7 +89,6 @@ func (li *LinkedList[T]) Remove(v T) *Node[T] {
 	if node == nil {
 		return nil
 	}
-
 	prev.next = node.next
 	li.length--
 	return node
@@ -95,4 +117,9 @@ func (li *LinkedList[T]) Tail() *Node[T] {
 // Empty check if the linked list is empty.
 func (li *LinkedList[T]) Empty() bool {
 	return li.length == 0
+}
+
+// Len returns the length of the linked list.
+func (li *LinkedList[T]) Len() int {
+	return li.length
 }

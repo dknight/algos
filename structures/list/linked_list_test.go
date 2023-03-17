@@ -1,6 +1,8 @@
 package list
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestLinkedList(t *testing.T) {
 	t.Run("New()", func(t *testing.T) {
@@ -31,61 +33,48 @@ func TestLinkedList(t *testing.T) {
 		}
 	})
 
-	t.Run("Head_Empty()", func(t *testing.T) {
-		li := NewLinkedList[int]()
-		got := li.Head()
-		if got != nil {
-			t.Errorf("Expected %v got %v", nil, got)
-		}
-	})
-
 	t.Run("Head()", func(t *testing.T) {
-		li := NewLinkedList[int]()
-		li.Push(1)
-		li.Push(2)
-		li.Push(3)
-		exp := 1
-		got := li.Head()
-		if exp != got.Value() {
-			t.Errorf("Expected %v got %v", exp, got.Value())
-		}
-	})
+		t.Run("Empty", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			got := li.Head()
+			if got != nil {
+				t.Errorf("Expected %v got %v", nil, got)
+			}
+		})
 
-	t.Run("Tail_Empty()", func(t *testing.T) {
-		li := NewLinkedList[int]()
-		got := li.Tail()
-		if got != nil {
-			t.Errorf("Expected %v got %v", nil, got)
-		}
+		t.Run("Common", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			li.Push(1)
+			li.Push(2)
+			li.Push(3)
+			exp := 1
+			got := li.Head()
+			if exp != got.Value() {
+				t.Errorf("Expected %v got %v", exp, got.Value())
+			}
+		})
 	})
 
 	t.Run("Tail()", func(t *testing.T) {
-		li := NewLinkedList[int]()
-		li.Push(1)
-		li.Push(2)
-		li.Push(3)
-		exp := 3
-		got := li.Tail()
-		if exp != got.Value() {
-			t.Errorf("Expected %v got %v", exp, got.Value())
-		}
-	})
-
-	t.Run("Node_Next()", func(t *testing.T) {
-		ranks := []string{
-			"private", "corporal", "sergeant", "lieutenant",
-		}
-		li := NewLinkedList[string]()
-		for i := 0; i < len(ranks); i++ {
-			li.Push(ranks[i])
-		}
-		for i, node := 0, li.Head(); node != nil; i, node = i+1, node.Next() {
-			exp := ranks[i]
-			got := node.Value()
-			if exp != got {
-				t.Errorf("Expected %v got %v", exp, got)
+		t.Run("Empty()", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			got := li.Tail()
+			if got != nil {
+				t.Errorf("Expected %v got %v", nil, got)
 			}
-		}
+		})
+
+		t.Run("Common", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			li.Push(1)
+			li.Push(2)
+			li.Push(3)
+			exp := 3
+			got := li.Tail()
+			if exp != got.Value() {
+				t.Errorf("Expected %v got %v", exp, got.Value())
+			}
+		})
 	})
 
 	t.Run("Empty()", func(t *testing.T) {
@@ -103,78 +92,259 @@ func TestLinkedList(t *testing.T) {
 		}
 	})
 
-	t.Run("Remove()_Empty", func(t *testing.T) {
-		li := NewLinkedList[int]()
-		got := li.Remove(2)
-		if got != nil {
-			t.Errorf("Expected %v got %v", nil, got)
-		}
+	t.Run("RemoveByValue()", func(t *testing.T) {
+		t.Run("empty", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			got := li.RemoveByValue(2)
+			if got != nil {
+				t.Errorf("Expected %v got %v", nil, got)
+			}
+		})
+
+		t.Run("Common", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			li.Push(1)
+			li.Push(2)
+			li.Push(3)
+			got := li.RemoveByValue(2)
+			if got == nil {
+				t.Errorf("Expected %v got %v", got, nil)
+			}
+			if li.Len() != 2 {
+				t.Errorf("Expected %v got %v", 2, li.Len())
+			}
+
+			got = li.RemoveByValue(4)
+			if got != nil {
+				t.Errorf("Expected %v got %v", nil, got)
+			}
+
+			elem1 := li.Head()
+			elem2 := elem1.Next()
+			if elem1.Value() != 1 {
+				t.Errorf("Expected %v got %v", 1, elem1.Value())
+			}
+			if elem2.Value() != 3 {
+				t.Errorf("Expected %v got %v", 3, elem2.Value())
+			}
+			li.RemoveByValue(1)
+			li.RemoveByValue(3)
+			if li.Len() != 0 {
+				t.Errorf("Expected %v got %v", 0, li.Len())
+			}
+		})
 	})
 
 	t.Run("Remove()", func(t *testing.T) {
-		li := NewLinkedList[int]()
-		li.Push(1)
-		li.Push(2)
-		li.Push(3)
-		got := li.Remove(2)
-		if got == nil {
-			t.Errorf("Expected %v got %v", got, nil)
-		}
-		if li.Len() != 2 {
-			t.Errorf("Expected %v got %v", 2, li.Len())
-		}
+		t.Run("Empty", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			got := li.Remove(nil)
+			if got != nil {
+				t.Errorf("Expected %v got %v", nil, got)
+			}
+		})
 
-		got = li.Remove(4)
-		if got != nil {
-			t.Errorf("Expected %v got %v", nil, got)
-		}
+		t.Run("Common", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			li.Push(11)
+			li.Push(22)
+			li.Push(33)
+			node := li.FindByValue(22)
+			removed := li.Remove(node)
+			if removed != node {
+				t.Errorf("Expected %v got %v", removed, node)
+			}
+			if li.Len() != 2 {
+				t.Errorf("Expected %v got %v", 2, li.Len())
+			}
 
-		elem1 := li.Head()
-		elem2 := elem1.Next()
-		if elem1.Value() != 1 {
-			t.Errorf("Expected %v got %v", 1, elem1.Value())
-		}
-		if elem2.Value() != 3 {
-			t.Errorf("Expected %v got %v", 3, elem2.Value())
-		}
-		li.Remove(1)
-		li.Remove(3)
-		if li.Len() != 0 {
-			t.Errorf("Expected %v got %v", 0, li.Len())
-		}
+			node = li.FindByValue(11)
+			removed = li.Remove(node)
+			if removed != node {
+				t.Errorf("Expected %v got %v", removed, node)
+			}
+			if li.Len() != 1 {
+				t.Errorf("Expected %v got %v", 1, li.Len())
+			}
+			exp := 33
+			got := li.Head().Value()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+			got = li.Tail().Value()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+		})
 	})
 
-	t.Run("SearchByValue()", func(t *testing.T) {
+	t.Run("FindByValue()", func(t *testing.T) {
+		t.Run("Common", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			li.Push(1)
+			li.Push(2)
+			li.Push(3)
+			found := li.FindByValue(2)
+			got := found.Value()
+			exp := 2
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+
+			found = li.FindByValue(4)
+			if found != nil {
+				t.Errorf("Expected %v got %v", nil, got)
+			}
+		})
+
+		t.Run("structs", func(t *testing.T) {
+			type Person struct {
+				Name string
+				Age  int
+			}
+			people := []Person{
+				Person{
+					Name: "Toby",
+					Age:  12,
+				},
+				Person{
+					Name: "Julia",
+					Age:  27,
+				},
+				Person{
+					Name: "Joe",
+					Age:  34,
+				},
+			}
+			li := NewLinkedList[Person]()
+			for _, p := range people {
+				li.Push(p)
+			}
+			exp := len(people)
+			got := li.Len()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+
+			li.RemoveByValue(people[1])
+			exp = 2
+			got = li.Len()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+
+			li.RemoveByValue(Person{Name: "Joe", Age: 34})
+			exp = 1
+			got = li.Len()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+		})
+	})
+
+	t.Run("InsertAfter()", func(t *testing.T) {
+		t.Run("Empty", func(t *testing.T) {
+			li := NewLinkedList[int]()
+			node := &Node[int]{11, nil}
+			inserted := li.InsertAfter(node, nil)
+			exp := 11
+			got := inserted.Value()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+		})
+
+		t.Run("Common", func(t *testing.T) {
+			nodes := []*Node[int]{
+				&Node[int]{11, nil},
+				&Node[int]{22, nil},
+				&Node[int]{33, nil},
+				&Node[int]{44, nil},
+			}
+			li := NewLinkedList[int]()
+			got := li.InsertAfter(nodes[0], nil)
+			exp := li.Head()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+
+			got = li.InsertAfter(nodes[1], exp)
+			exp = exp.Next()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+
+			got = li.InsertAfter(nodes[2], exp)
+			exp = exp.Next()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+
+			got = li.InsertAfter(nodes[3], nodes[1])
+			exp = nodes[1].Next()
+			if got != exp {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
+		})
+	})
+
+	t.Run("InsertWithValue()", func(t *testing.T) {
 		li := NewLinkedList[int]()
-		li.Push(1)
-		li.Push(2)
-		li.Push(3)
-		found := li.FindByValue(2)
-		got := found.Value()
-		exp := 2
+		node := li.InsertWithValue(11, li.head)
+		exp := 11
+		got := node.Value()
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 
-		found = li.FindByValue(4)
-		if found != nil {
-			t.Errorf("Expected %v got %v", nil, got)
-		}
-	})
-
-	t.Run("structs", func(t *testing.T) {
-		type Person struct {
-			Name string
-			Age  int
-		}
-		p := Person{"Dima", 37}
-		li := NewLinkedList[Person]()
-		li.Push(p)
-		li.Remove(p)
-		exp := 0
-		got := li.Len()
+		node = li.InsertWithValue(22, node)
+		exp = 22
+		got = node.Value()
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
+		}
+		got = li.Tail().Value()
+		if got != exp {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+		got = li.Head().Value()
+		exp = 11
+		if got != exp {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+
+		node = li.InsertWithValue(33, li.head)
+		exp = 33
+		got = li.Head().Next().Value()
+		if got != exp {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+		exp = 33
+		got = li.Head().Next().Value()
+		if got != exp {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+		// for n := li.Head(); n != nil; n = n.Next() {
+		// 	fmt.Println(n)
+		// }
+	})
+}
+
+func TestNode(t *testing.T) {
+	t.Run("Next()", func(t *testing.T) {
+		ranks := []string{
+			"private", "corporal", "sergeant", "lieutenant",
+		}
+		li := NewLinkedList[string]()
+		for i := 0; i < len(ranks); i++ {
+			li.Push(ranks[i])
+		}
+		for i, node := 0, li.Head(); node != nil; i, node = i+1, node.Next() {
+			exp := ranks[i]
+			got := node.Value()
+			if exp != got {
+				t.Errorf("Expected %v got %v", exp, got)
+			}
 		}
 	})
 }
