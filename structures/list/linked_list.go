@@ -38,7 +38,7 @@ func (li *LinkedList[T]) Append(v T) *Node[T] {
 	return li.InsertWithValue(v, li.tail)
 }
 
-// Push adds the value to the end of the list.
+// Push adds the value to the beginning of the list.
 func (li *LinkedList[T]) Push(v T) *Node[T] {
 	return li.InsertWithValue(v, nil)
 }
