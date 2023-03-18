@@ -49,8 +49,11 @@ func (li *LinkedList[T]) InsertWithValue(v T, after *Node[T]) *Node[T] {
 func (li *LinkedList[T]) InsertAfter(node, after *Node[T]) *Node[T] {
 	li.length++
 	if after == nil {
+		node.next = li.head
 		li.head = node
-		li.tail = node
+		if li.tail == nil {
+			li.tail = node
+		}
 		return node
 	}
 	if after != li.tail {
