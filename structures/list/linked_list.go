@@ -33,8 +33,8 @@ func NewLinkedList[T comparable]() *LinkedList[T] {
 	return &LinkedList[T]{}
 }
 
-// Push adds the value to the end of the list.
-func (li *LinkedList[T]) Push(v T) *Node[T] {
+// Append adds the value to the end of the list.
+func (li *LinkedList[T]) Append(v T) *Node[T] {
 	return li.InsertWithValue(v, li.tail)
 }
 

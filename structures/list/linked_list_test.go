@@ -21,11 +21,10 @@ func TestLinkedList(t *testing.T) {
 		}
 	})
 
-	t.Run("Push()", func(t *testing.T) {
-		t.Skip()
+	t.Run("Append()", func(t *testing.T) {
 		li := NewLinkedList[int]()
-		li.Push(1)
-		li.Push(2)
+		li.Append(1)
+		li.Append(2)
 		exp := 2
 		got := li.Len()
 		if exp != got {
@@ -44,9 +43,9 @@ func TestLinkedList(t *testing.T) {
 
 		t.Run("Common", func(t *testing.T) {
 			li := NewLinkedList[int]()
-			li.Push(1)
-			li.Push(2)
-			li.Push(3)
+			li.Append(1)
+			li.Append(2)
+			li.Append(3)
 			exp := 1
 			got := li.Head()
 			if exp != got.Value() {
@@ -66,9 +65,9 @@ func TestLinkedList(t *testing.T) {
 
 		t.Run("Common", func(t *testing.T) {
 			li := NewLinkedList[int]()
-			li.Push(1)
-			li.Push(2)
-			li.Push(3)
+			li.Append(1)
+			li.Append(2)
+			li.Append(3)
 			exp := 3
 			got := li.Tail()
 			if exp != got.Value() {
@@ -84,7 +83,7 @@ func TestLinkedList(t *testing.T) {
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
-		li.Push(1)
+		li.Append(1)
 		exp = false
 		got = li.Empty()
 		if exp != got {
@@ -103,9 +102,9 @@ func TestLinkedList(t *testing.T) {
 
 		t.Run("Common", func(t *testing.T) {
 			li := NewLinkedList[int]()
-			li.Push(1)
-			li.Push(2)
-			li.Push(3)
+			li.Append(1)
+			li.Append(2)
+			li.Append(3)
 			got := li.RemoveByValue(2)
 			if got == nil {
 				t.Errorf("Expected %v got %v", got, nil)
@@ -146,9 +145,9 @@ func TestLinkedList(t *testing.T) {
 
 		t.Run("Common", func(t *testing.T) {
 			li := NewLinkedList[int]()
-			li.Push(11)
-			li.Push(22)
-			li.Push(33)
+			li.Append(11)
+			li.Append(22)
+			li.Append(33)
 			node := li.FindByValue(22)
 			removed := li.Remove(node)
 			if removed != node {
@@ -181,9 +180,9 @@ func TestLinkedList(t *testing.T) {
 	t.Run("FindByValue()", func(t *testing.T) {
 		t.Run("Common", func(t *testing.T) {
 			li := NewLinkedList[int]()
-			li.Push(1)
-			li.Push(2)
-			li.Push(3)
+			li.Append(1)
+			li.Append(2)
+			li.Append(3)
 			found := li.FindByValue(2)
 			got := found.Value()
 			exp := 2
@@ -218,7 +217,7 @@ func TestLinkedList(t *testing.T) {
 			}
 			li := NewLinkedList[Person]()
 			for _, p := range people {
-				li.Push(p)
+				li.Append(p)
 			}
 			exp := len(people)
 			got := li.Len()
@@ -337,7 +336,7 @@ func TestNode(t *testing.T) {
 		}
 		li := NewLinkedList[string]()
 		for i := 0; i < len(ranks); i++ {
-			li.Push(ranks[i])
+			li.Append(ranks[i])
 		}
 		for i, node := 0, li.Head(); node != nil; i, node = i+1, node.Next() {
 			exp := ranks[i]
