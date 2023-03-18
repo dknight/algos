@@ -4,18 +4,13 @@ package list
 // TODO comparable may not be equal of using structs.
 // NOTE Maybe it is better to use reflect.DeepEqual() to be sure?
 type Node[T comparable] struct {
-	value T
+	Value T
 	next  *Node[T]
 }
 
 // Next is the nodes next iterator retrieves the next node in linked list.
 func (n *Node[T]) Next() *Node[T] {
 	return n.next
-}
-
-// Value gets the value of the node.
-func (n *Node[T]) Value() T {
-	return n.value
 }
 
 // LinkedList is a single linked list.
@@ -46,7 +41,7 @@ func (li *LinkedList[T]) Push(v T) *Node[T] {
 // InsertWithValue creates a node with given value and inserts it after the
 // given node.
 func (li *LinkedList[T]) InsertWithValue(v T, after *Node[T]) *Node[T] {
-	node := &Node[T]{value: v}
+	node := &Node[T]{Value: v}
 	return li.InsertAfter(node, after)
 }
 
@@ -108,7 +103,7 @@ func (li *LinkedList[T]) Remove(n *Node[T]) *Node[T] {
 // FindByValue search the node by it's value.
 func (li *LinkedList[T]) FindByValue(v T) *Node[T] {
 	for node := li.head; node != nil; node = node.Next() {
-		if node.Value() == v {
+		if node.Value == v {
 			return node
 		}
 	}

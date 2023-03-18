@@ -25,7 +25,7 @@ func TestLinkedList(t *testing.T) {
 		li := NewLinkedList[int]()
 		li.Append(1)
 		exp := 1
-		got := li.Tail().Value()
+		got := li.Tail().Value
 		length := li.Len()
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
@@ -36,7 +36,7 @@ func TestLinkedList(t *testing.T) {
 
 		li.Append(2)
 		exp = 2
-		got = li.Tail().Value()
+		got = li.Tail().Value
 		length = li.Len()
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
@@ -51,7 +51,7 @@ func TestLinkedList(t *testing.T) {
 
 		li.Push(1)
 		exp := 1
-		got := li.Head().Value()
+		got := li.Head().Value
 		length := li.Len()
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
@@ -62,7 +62,7 @@ func TestLinkedList(t *testing.T) {
 
 		li.Push(2)
 		exp = 2
-		got = li.Head().Value()
+		got = li.Head().Value
 		length = li.Len()
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
@@ -88,8 +88,8 @@ func TestLinkedList(t *testing.T) {
 			li.Append(3)
 			exp := 1
 			got := li.Head()
-			if exp != got.Value() {
-				t.Errorf("Expected %v got %v", exp, got.Value())
+			if exp != got.Value {
+				t.Errorf("Expected %v got %v", exp, got.Value)
 			}
 		})
 	})
@@ -110,8 +110,8 @@ func TestLinkedList(t *testing.T) {
 			li.Append(3)
 			exp := 3
 			got := li.Tail()
-			if exp != got.Value() {
-				t.Errorf("Expected %v got %v", exp, got.Value())
+			if exp != got.Value {
+				t.Errorf("Expected %v got %v", exp, got.Value)
 			}
 		})
 	})
@@ -160,11 +160,11 @@ func TestLinkedList(t *testing.T) {
 
 			elem1 := li.Head()
 			elem2 := elem1.Next()
-			if elem1.Value() != 1 {
-				t.Errorf("Expected %v got %v", 1, elem1.Value())
+			if elem1.Value != 1 {
+				t.Errorf("Expected %v got %v", 1, elem1.Value)
 			}
-			if elem2.Value() != 3 {
-				t.Errorf("Expected %v got %v", 3, elem2.Value())
+			if elem2.Value != 3 {
+				t.Errorf("Expected %v got %v", 3, elem2.Value)
 			}
 			li.RemoveByValue(1)
 			li.RemoveByValue(3)
@@ -206,11 +206,11 @@ func TestLinkedList(t *testing.T) {
 				t.Errorf("Expected %v got %v", 1, li.Len())
 			}
 			exp := 33
-			got := li.Head().Value()
+			got := li.Head().Value
 			if got != exp {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
-			got = li.Tail().Value()
+			got = li.Tail().Value
 			if got != exp {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
@@ -224,7 +224,7 @@ func TestLinkedList(t *testing.T) {
 			li.Append(2)
 			li.Append(3)
 			found := li.FindByValue(2)
-			got := found.Value()
+			got := found.Value
 			exp := 2
 			if got != exp {
 				t.Errorf("Expected %v got %v", exp, got)
@@ -287,7 +287,7 @@ func TestLinkedList(t *testing.T) {
 			node := &Node[int]{11, nil}
 			inserted := li.InsertAfter(node, nil)
 			exp := 11
-			got := inserted.Value()
+			got := inserted.Value
 			if got != exp {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
@@ -331,22 +331,22 @@ func TestLinkedList(t *testing.T) {
 		li := NewLinkedList[int]()
 		node := li.InsertWithValue(11, li.head)
 		exp := 11
-		got := node.Value()
+		got := node.Value
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 
 		node = li.InsertWithValue(22, node)
 		exp = 22
-		got = node.Value()
+		got = node.Value
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
-		got = li.Tail().Value()
+		got = li.Tail().Value
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
-		got = li.Head().Value()
+		got = li.Head().Value
 		exp = 11
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
@@ -354,12 +354,12 @@ func TestLinkedList(t *testing.T) {
 
 		node = li.InsertWithValue(33, li.head)
 		exp = 33
-		got = li.Head().Next().Value()
+		got = li.Head().Next().Value
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 		exp = 33
-		got = li.Head().Next().Value()
+		got = li.Head().Next().Value
 		if got != exp {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
@@ -380,7 +380,7 @@ func TestNode(t *testing.T) {
 		}
 		for i, node := 0, li.Head(); node != nil; i, node = i+1, node.Next() {
 			exp := ranks[i]
-			got := node.Value()
+			got := node.Value
 			if exp != got {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
