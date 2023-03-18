@@ -38,6 +38,11 @@ func (li *LinkedList[T]) Append(v T) *Node[T] {
 	return li.InsertWithValue(v, li.tail)
 }
 
+// Push adds the value to the end of the list.
+func (li *LinkedList[T]) Push(v T) *Node[T] {
+	return li.InsertWithValue(v, nil)
+}
+
 // InsertWithValue creates a node with given value and inserts it after the
 // given node.
 func (li *LinkedList[T]) InsertWithValue(v T, after *Node[T]) *Node[T] {

@@ -24,11 +24,51 @@ func TestLinkedList(t *testing.T) {
 	t.Run("Append()", func(t *testing.T) {
 		li := NewLinkedList[int]()
 		li.Append(1)
-		li.Append(2)
-		exp := 2
-		got := li.Len()
+		exp := 1
+		got := li.Tail().Value()
+		length := li.Len()
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
+		}
+		if length != 1 {
+			t.Errorf("Expected %v got %v", 1, length)
+		}
+
+		li.Append(2)
+		exp = 2
+		got = li.Tail().Value()
+		length = li.Len()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+		if length != 2 {
+			t.Errorf("Expected %v got %v", 2, length)
+		}
+	})
+
+	t.Run("Push()", func(t *testing.T) {
+		li := NewLinkedList[int]()
+
+		li.Push(1)
+		exp := 1
+		got := li.Head().Value()
+		length := li.Len()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+		if length != 1 {
+			t.Errorf("Expected %v got %v", 1, length)
+		}
+
+		li.Push(2)
+		exp = 2
+		got = li.Head().Value()
+		length = li.Len()
+		if exp != got {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
+		if length != 2 {
+			t.Errorf("Expected %v got %v", 2, length)
 		}
 	})
 
