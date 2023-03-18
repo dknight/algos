@@ -55,19 +55,19 @@ func TestList(t *testing.T) {
 		li.PushBack(111)
 		expBack := 111
 		gotBack := li.Back()
-		if gotBack.Value() != expBack {
-			t.Errorf("Expected %v got %v", expBack, gotBack.Value())
+		if gotBack.Value != expBack {
+			t.Errorf("Expected %v got %v", expBack, gotBack.Value)
 		}
 		gotBack = li.PushBack(222)
 		expBack = 222
-		if gotBack.Value() != expBack {
-			t.Errorf("Expected %v got %v", expBack, gotBack.Value())
+		if gotBack.Value != expBack {
+			t.Errorf("Expected %v got %v", expBack, gotBack.Value)
 		}
 
 		gotFront := li.Front()
 		expFront := 111
-		if gotFront.Value() != expFront {
-			t.Errorf("Expected %v got %v", expFront, gotFront.Value())
+		if gotFront.Value != expFront {
+			t.Errorf("Expected %v got %v", expFront, gotFront.Value)
 		}
 	})
 
@@ -78,11 +78,11 @@ func TestList(t *testing.T) {
 		expBack := 111
 		gotFront := li.Front()
 		gotBack := li.Back()
-		if gotFront.Value() != expFront {
-			t.Errorf("Expected %v got %v", expFront, gotFront.Value())
+		if gotFront.Value != expFront {
+			t.Errorf("Expected %v got %v", expFront, gotFront.Value)
 		}
-		if gotBack.Value() != expBack {
-			t.Errorf("Expected %v got %v", expBack, gotBack.Value())
+		if gotBack.Value != expBack {
+			t.Errorf("Expected %v got %v", expBack, gotBack.Value)
 		}
 
 		gotFront = li.PushFront(222)
@@ -90,11 +90,11 @@ func TestList(t *testing.T) {
 		expFront = 222
 		gotFront = li.Front()
 		gotBack = li.Back()
-		if gotFront.Value() != expFront {
-			t.Errorf("Expected %v got %v", expFront, gotFront.Value())
+		if gotFront.Value != expFront {
+			t.Errorf("Expected %v got %v", expFront, gotFront.Value)
 		}
-		if gotBack.Value() != expBack {
-			t.Errorf("Expected %v got %v", expBack, gotBack.Value())
+		if gotBack.Value != expBack {
+			t.Errorf("Expected %v got %v", expBack, gotBack.Value)
 		}
 	})
 
@@ -109,7 +109,7 @@ func TestList(t *testing.T) {
 			}
 			exp := ranks[2]
 			found := li.FindByValue(ranks[2])
-			got := found.Value()
+			got := found.Value
 			if exp != got {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
@@ -134,8 +134,8 @@ func TestList(t *testing.T) {
 			li := NewDoublyLikedList[Person]()
 			li.PushFront(p1)
 			found := li.FindByValue(p2)
-			if p1.Name != found.Value().Name {
-				t.Errorf("Expected %v got %v", p2, found.Value())
+			if p1.Name != found.Value.Name {
+				t.Errorf("Expected %v got %v", p2, found.Value)
 			}
 		})
 	})
@@ -167,21 +167,21 @@ func TestList(t *testing.T) {
 
 		node := li.RemoveFront()
 		exp := "Hello"
-		got := node.Value()
+		got := node.Value
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 
 		node = li.RemoveFront()
 		exp = "Fluffy"
-		got = node.Value()
+		got = node.Value
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 
 		node = li.RemoveFront()
 		exp = "Kitty"
-		got = node.Value()
+		got = node.Value
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
@@ -204,21 +204,21 @@ func TestList(t *testing.T) {
 
 		node := li.RemoveBack()
 		exp := "Kitty"
-		got := node.Value()
+		got := node.Value
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 
 		node = li.RemoveBack()
 		exp = "Fluffy"
-		got = node.Value()
+		got = node.Value
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 
 		node = li.RemoveBack()
 		exp = "Hello"
-		got = node.Value()
+		got = node.Value
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
@@ -245,14 +245,14 @@ func TestDoublyLinkedNode(t *testing.T) {
 		}
 		for i, node := 0, li.Front(); node != nil; i, node = i+1, node.Next() {
 			exp := ranks[i]
-			got := node.Value()
+			got := node.Value
 			if exp != got {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
 		}
 		for i, node := li.Len()-1, li.Back(); node != nil; i, node = i-1, node.Prev() {
 			exp := ranks[i]
-			got := node.Value()
+			got := node.Value
 			if exp != got {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
@@ -269,14 +269,14 @@ func TestDoublyLinkedNode(t *testing.T) {
 		}
 		for i, nod := 0, li.Back(); nod != nil; i, nod = i+1, nod.Prev() {
 			exp := ranks[i]
-			got := nod.Value()
+			got := nod.Value
 			if exp != got {
 				t.Errorf("Expected %v got %v", exp, got)
 			}
 		}
 		for i, nod := li.Len()-1, li.Front(); nod != nil; i, nod = i-1, nod.Next() {
 			exp := ranks[i]
-			got := nod.Value()
+			got := nod.Value
 			if exp != got {
 				t.Errorf("Expected %v got %v", exp, got)
 			}

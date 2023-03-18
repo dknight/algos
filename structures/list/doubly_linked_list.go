@@ -6,7 +6,7 @@ package list
 type DoublyLinkedNode[T comparable] struct {
 	next, prev *DoublyLinkedNode[T]
 	list       *DoublyLinkedList[T]
-	value      T
+	Value      T
 }
 
 // Next is the next iterator for the node. Retrieves the next node.
@@ -23,11 +23,6 @@ func (n *DoublyLinkedNode[T]) Prev() *DoublyLinkedNode[T] {
 		return prv
 	}
 	return nil
-}
-
-// Value gets the value of the node.
-func (n *DoublyLinkedNode[T]) Value() T {
-	return n.value
 }
 
 // DoublyLinkedList represents the doubly linked list.
@@ -51,7 +46,7 @@ func NewDoublyLikedList[T comparable]() *DoublyLinkedList[T] {
 // PushBack pushes the value to the end of the list.
 func (li *DoublyLinkedList[T]) PushBack(val T) *DoublyLinkedNode[T] {
 	node := &DoublyLinkedNode[T]{
-		value: val,
+		Value: val,
 		list:  li,
 	}
 	return li.insertValue(node, li.root.prev)
@@ -60,7 +55,7 @@ func (li *DoublyLinkedList[T]) PushBack(val T) *DoublyLinkedNode[T] {
 // PushFront pushes the value to the beginning of the list.
 func (li *DoublyLinkedList[T]) PushFront(val T) *DoublyLinkedNode[T] {
 	node := &DoublyLinkedNode[T]{
-		value: val,
+		Value: val,
 		list:  li,
 	}
 	return li.insertValue(node, &li.root)
@@ -95,7 +90,7 @@ func (li *DoublyLinkedList[T]) Back() *DoublyLinkedNode[T] {
 // forwards direction. If not found the nil is returned.
 func (li *DoublyLinkedList[T]) FindByValue(cmp T) *DoublyLinkedNode[T] {
 	for node := li.Front(); node != nil; node = node.Next() {
-		if node.Value() == cmp {
+		if node.Value == cmp {
 			return node
 		}
 	}
