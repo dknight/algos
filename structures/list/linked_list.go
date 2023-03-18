@@ -74,24 +74,27 @@ func (li *LinkedList[T]) RemoveByValue(v T) *Node[T] {
 // Remove removes the node from the linked list.
 func (li *LinkedList[T]) Remove(n *Node[T]) *Node[T] {
 	var prev *Node[T]
-	node := li.head
-	if node != nil && n == node {
-		li.head = node.next
+	curr := li.head
+	if curr != nil && curr == n {
+		li.head = curr.next
 		li.length--
-		return node
+		return curr
 	}
 
-	for node != nil && n != node {
-		prev = node
-		node = node.next
+	for curr != nil && n != curr {
+		prev = curr
+		curr = curr.next
 	}
 
-	if node == nil {
+	if curr == nil {
 		return nil
 	}
-	prev.next = node.next
+	prev.next = curr.next
 	li.length--
-	return node
+	// Need to figure about "island of pointer" in Go.
+	// Prevent memory leak?
+	// curr.next = nil
+	return curr
 }
 
 // FindByValue search the node by it's value.
