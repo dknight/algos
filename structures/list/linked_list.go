@@ -33,7 +33,7 @@ func NewLinkedList[T comparable]() *LinkedList[T] {
 	return &LinkedList[T]{}
 }
 
-// Push adds the value to the beginning of the list.
+// Push adds the value to the end of the list.
 func (li *LinkedList[T]) Push(v T) *Node[T] {
 	return li.InsertWithValue(v, li.tail)
 }
