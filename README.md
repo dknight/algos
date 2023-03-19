@@ -22,6 +22,7 @@ Go has some built-in data structures out of box.
 
 ## Data structures
 
+* Set
 * Stack
 * Lists
     - Linked List
