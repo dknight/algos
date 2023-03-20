@@ -7,9 +7,12 @@ import (
 
 func assertPanic(t *testing.T, fn func()) {
 	t.Helper()
-	defer func() { _ = recover() }()
+	defer func() {
+		if err := recover(); err == nil {
+			t.Error(err)
+		}
+	}()
 	fn()
-	t.Errorf("should have panicked")
 }
 
 func TestStack(t *testing.T) {
