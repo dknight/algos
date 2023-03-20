@@ -1,4 +1,4 @@
-package list
+package llist
 
 // Node represents the node in linked in.
 // TODO comparable may not be equal of using structs.

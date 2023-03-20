@@ -1,4 +1,4 @@
-package list
+package dlist
 
 // DoublyLinkedNode of the doubly linked list.
 // TODO comparable may not be equal of using structs.
