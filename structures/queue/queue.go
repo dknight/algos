@@ -2,6 +2,7 @@
 // operations with it.
 package queue
 
+// Queue represents the queue structure.
 type Queue[T any] []T
 
 // New creates new queue instance and returns pointer to it.
