@@ -27,6 +27,8 @@ Go has some built-in data structures out of box.
 * Lists
     - Linked List
     - Doubly Linked List (unfinished)
+* Queues
+    - Queue
 
 ## Algorithms
 
