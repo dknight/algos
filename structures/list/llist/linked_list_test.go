@@ -6,14 +6,14 @@ import (
 
 func TestLinkedList(t *testing.T) {
 	t.Run("New()", func(t *testing.T) {
-		li := NewLinkedList[int]()
+		li := New[int]()
 		if li == nil {
 			t.Error("List should not be nil")
 		}
 	})
 
 	t.Run("Len()", func(t *testing.T) {
-		li := NewLinkedList[int]()
+		li := New[int]()
 		exp := 0
 		got := li.Len()
 		if exp != got {
@@ -22,7 +22,7 @@ func TestLinkedList(t *testing.T) {
 	})
 
 	t.Run("Append()", func(t *testing.T) {
-		li := NewLinkedList[int]()
+		li := New[int]()
 		li.Append(1)
 		exp := 1
 		got := li.Tail().Value
@@ -47,7 +47,7 @@ func TestLinkedList(t *testing.T) {
 	})
 
 	t.Run("Push()", func(t *testing.T) {
-		li := NewLinkedList[int]()
+		li := New[int]()
 
 		li.Push(1)
 		exp := 1
@@ -74,7 +74,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("Head()", func(t *testing.T) {
 		t.Run("Empty", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			got := li.Head()
 			if got != nil {
 				t.Errorf("Expected %v got %v", nil, got)
@@ -82,7 +82,7 @@ func TestLinkedList(t *testing.T) {
 		})
 
 		t.Run("Common", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			li.Append(1)
 			li.Append(2)
 			li.Append(3)
@@ -96,7 +96,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("Tail()", func(t *testing.T) {
 		t.Run("Empty()", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			got := li.Tail()
 			if got != nil {
 				t.Errorf("Expected %v got %v", nil, got)
@@ -104,7 +104,7 @@ func TestLinkedList(t *testing.T) {
 		})
 
 		t.Run("Common", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			li.Append(1)
 			li.Append(2)
 			li.Append(3)
@@ -117,7 +117,7 @@ func TestLinkedList(t *testing.T) {
 	})
 
 	t.Run("Empty()", func(t *testing.T) {
-		li := NewLinkedList[int]()
+		li := New[int]()
 		exp := true
 		got := li.Empty()
 		if exp != got {
@@ -133,7 +133,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("RemoveByValue()", func(t *testing.T) {
 		t.Run("empty", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			got := li.RemoveByValue(2)
 			if got != nil {
 				t.Errorf("Expected %v got %v", nil, got)
@@ -141,7 +141,7 @@ func TestLinkedList(t *testing.T) {
 		})
 
 		t.Run("Common", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			li.Append(1)
 			li.Append(2)
 			li.Append(3)
@@ -176,7 +176,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("Remove()", func(t *testing.T) {
 		t.Run("Empty", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			got := li.Remove(nil)
 			if got != nil {
 				t.Errorf("Expected %v got %v", nil, got)
@@ -184,7 +184,7 @@ func TestLinkedList(t *testing.T) {
 		})
 
 		t.Run("Common", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			li.Append(11)
 			li.Append(22)
 			li.Append(33)
@@ -219,7 +219,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("FindByValue()", func(t *testing.T) {
 		t.Run("Common", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			li.Append(1)
 			li.Append(2)
 			li.Append(3)
@@ -255,7 +255,7 @@ func TestLinkedList(t *testing.T) {
 					Age:  34,
 				},
 			}
-			li := NewLinkedList[Person]()
+			li := New[Person]()
 			for _, p := range people {
 				li.Append(p)
 			}
@@ -283,7 +283,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("InsertAfter()", func(t *testing.T) {
 		t.Run("Empty", func(t *testing.T) {
-			li := NewLinkedList[int]()
+			li := New[int]()
 			node := &Node[int]{11, nil}
 			inserted := li.InsertAfter(node, nil)
 			exp := 11
@@ -300,7 +300,7 @@ func TestLinkedList(t *testing.T) {
 				&Node[int]{33, nil},
 				&Node[int]{44, nil},
 			}
-			li := NewLinkedList[int]()
+			li := New[int]()
 			got := li.InsertAfter(nodes[0], nil)
 			exp := li.Head()
 			if got != exp {
@@ -328,7 +328,7 @@ func TestLinkedList(t *testing.T) {
 	})
 
 	t.Run("InsertWithValue()", func(t *testing.T) {
-		li := NewLinkedList[int]()
+		li := New[int]()
 		node := li.InsertWithValue(11, li.head)
 		exp := 11
 		got := node.Value
@@ -374,7 +374,7 @@ func TestNode(t *testing.T) {
 		ranks := []string{
 			"private", "corporal", "sergeant", "lieutenant",
 		}
-		li := NewLinkedList[string]()
+		li := New[string]()
 		for i := 0; i < len(ranks); i++ {
 			li.Append(ranks[i])
 		}

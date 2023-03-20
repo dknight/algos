@@ -23,8 +23,8 @@ type LinkedList[T comparable] struct {
 	length     int
 }
 
-// NewLinkedList create a new linked list.
-func NewLinkedList[T comparable]() *LinkedList[T] {
+// New create a new linked list.
+func New[T comparable]() *LinkedList[T] {
 	return &LinkedList[T]{}
 }
 
