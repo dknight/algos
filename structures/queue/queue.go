@@ -17,7 +17,7 @@ func (q *Queue[T]) Enqueue(v T) T {
 	return v
 }
 
-// Dequeue puts an element to the end of the queue and returns dequeued
+// Dequeue remove an element the beginning of the queue and returns dequeued
 // element. Before dequeing it is practice to check is queue is empty or not.
 //
 //	queue := queue.New[any]()
