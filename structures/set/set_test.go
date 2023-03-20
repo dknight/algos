@@ -106,12 +106,12 @@ func TestSet(t *testing.T) {
 		}
 	})
 
-	t.Run("All()", func(t *testing.T) {
+	t.Run("Values()", func(t *testing.T) {
 		set := New[string]()
 		set.Add("Foo")
 		set.Add("Bar")
 		exp := []string{"Bar", "Foo"}
-		got := set.All()
+		got := set.Values()
 		sort.Slice(got, func(i, j int) bool {
 			return got[i] < got[j]
 		})

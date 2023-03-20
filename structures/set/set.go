@@ -8,10 +8,11 @@ import (
 )
 
 // Set is a set data structure.
+// Similar package can be found in https://pkg.go.dev/golang.org/x/exp/maps
 type Set[T comparable] map[T]bool
 
-// New creates a new set returns pointer to it.
-// NOTE Set is not ordered data structure.
+// New creates a new set returns pointer to it. The values in the set are in
+// an indeterminate order.
 func New[T comparable]() Set[T] {
 	return make(Set[T], 0)
 }
@@ -42,8 +43,8 @@ func (s Set[T]) Clear() {
 	}
 }
 
-// All values of the set.
-func (s Set[T]) All() []T {
+// Values returns all values of the set. Values are in indeterminate order.
+func (s Set[T]) Values() []T {
 	ret := make([]T, 0, len(s))
 	for k := range s {
 		ret = append(ret, k)
