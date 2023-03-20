@@ -22,15 +22,15 @@ func (s Set[T]) Add(v T) *T {
 	return &v
 }
 
-// Delete removes the value from the set and returns a pointer to deleted
+// Remove removes the value from the set and returns a pointer to deleted
 // element.
-func (s Set[T]) Delete(v T) *T {
+func (s Set[T]) Remove(v T) *T {
 	delete(s, v)
 	return &v
 }
 
-// Has checks that given element is present in the set.
-func (s Set[T]) Has(v T) bool {
+// Contains checks that given element is present in the set.
+func (s Set[T]) Contains(v T) bool {
 	_, ok := s[v]
 	return ok
 }

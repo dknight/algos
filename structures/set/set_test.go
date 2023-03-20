@@ -45,7 +45,7 @@ func TestSet(t *testing.T) {
 		}
 	})
 
-	t.Run("Delete()", func(t *testing.T) {
+	t.Run("Remove()", func(t *testing.T) {
 		type Person struct {
 			Name string
 			Age  int
@@ -61,7 +61,7 @@ func TestSet(t *testing.T) {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
 
-		set.Delete(p2)
+		set.Remove(p2)
 		got = set.Len()
 		exp = 1
 		if exp != got {
@@ -72,16 +72,16 @@ func TestSet(t *testing.T) {
 		}
 	})
 
-	t.Run("Has()", func(t *testing.T) {
+	t.Run("Contains()", func(t *testing.T) {
 		set := New[string]()
 		set.Add("Foo")
 		set.Add("Bar")
-		got := set.Has("Bar")
+		got := set.Contains("Bar")
 		exp := true
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
-		got = set.Has("Jar")
+		got = set.Contains("Jar")
 		exp = false
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
