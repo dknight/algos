@@ -34,7 +34,9 @@ func TestStack(t *testing.T) {
 
 	t.Run("Push()", func(t *testing.T) {
 		s := New[int]()
-		s.Push(1, 2, 3)
+		s.Push(1)
+		s.Push(2)
+		s.Push(3)
 		got := s.Len()
 		exp := 3
 		if exp != got {
@@ -45,7 +47,8 @@ func TestStack(t *testing.T) {
 	t.Run("Peek()", func(t *testing.T) {
 		t.Run("Common", func(t *testing.T) {
 			s := New[string]()
-			s.Push("boo", "moo")
+			s.Push("boo")
+			s.Push("moo")
 			exp := "moo"
 			got := s.Peek()
 			if exp != got {
@@ -61,7 +64,8 @@ func TestStack(t *testing.T) {
 
 	t.Run("Pop()", func(t *testing.T) {
 		s := New[string]()
-		s.Push("boo", "moo")
+		s.Push("boo")
+		s.Push("moo")
 		got := s.Pop()
 		exp := "moo"
 		if exp != got {
@@ -95,7 +99,11 @@ func TestStack(t *testing.T) {
 
 	t.Run("Reset()", func(t *testing.T) {
 		s := New[int]()
-		s.Push(1, 2, 3, 4, 5)
+		s.Push(1)
+		s.Push(2)
+		s.Push(3)
+		s.Push(4)
+		s.Push(5)
 		exp := 5
 		got := s.Len()
 		if exp != got {
@@ -111,7 +119,11 @@ func TestStack(t *testing.T) {
 
 	t.Run("Dump()", func(t *testing.T) {
 		s := New[int]()
-		s.Push(1, 2, 3, 4, 5)
+		s.Push(1)
+		s.Push(2)
+		s.Push(3)
+		s.Push(4)
+		s.Push(5)
 		exp := []int{1, 2, 3, 4, 5}
 		got := s.Dump()
 		if !reflect.DeepEqual(exp, got) {
@@ -121,7 +133,10 @@ func TestStack(t *testing.T) {
 
 	t.Run("String()", func(t *testing.T) {
 		s := New[int]()
-		s.Push(11, 22, 33, 44)
+		s.Push(11)
+		s.Push(22)
+		s.Push(33)
+		s.Push(44)
 		exp := "[11 22 33 44]"
 		got := s.String()
 		if exp != got {

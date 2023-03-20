@@ -30,11 +30,9 @@ func (s *Stack[T]) Len() int {
 	return len(*s)
 }
 
-// Push adds values to the stack.
-func (s *Stack[T]) Push(vals ...T) {
-	for _, v := range vals {
-		*s = append(*s, v)
-	}
+// Push adds value to the stack.
+func (s *Stack[T]) Push(v T) {
+	*s = append(*s, v)
 }
 
 // Peek returns the last element of the stack.
