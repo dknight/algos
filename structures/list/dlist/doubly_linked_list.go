@@ -1,16 +1,15 @@
 package dlist
 
-// DoublyLinkedNode of the doubly linked list.
+// Node of the doubly linked list.
 // TODO comparable may not be equal of using structs.
-// NOTE Maybe it is better to use reflect.DeepEqual() to be sure?
-type DoublyLinkedNode[T comparable] struct {
-	next, prev *DoublyLinkedNode[T]
+type Node[T comparable] struct {
+	next, prev *Node[T]
 	list       *DoublyLinkedList[T]
 	Value      T
 }
 
 // Next is the next iterator for the node. Retrieves the next node.
-func (n *DoublyLinkedNode[T]) Next() *DoublyLinkedNode[T] {
+func (n *Node[T]) Next() *Node[T] {
 	if nxt := n.next; n.list != nil && nxt != &n.list.root {
 		return nxt
 	}
@@ -18,7 +17,7 @@ func (n *DoublyLinkedNode[T]) Next() *DoublyLinkedNode[T] {
 }
 
 // Prev is the previous iterator for the node. Retrieves the previous node.
-func (n *DoublyLinkedNode[T]) Prev() *DoublyLinkedNode[T] {
+func (n *Node[T]) Prev() *Node[T] {
 	if prv := n.prev; n.list != nil && prv != &n.list.root {
 		return prv
 	}
@@ -31,12 +30,12 @@ func (n *DoublyLinkedNode[T]) Prev() *DoublyLinkedNode[T] {
 // to use in production. If you need the linked lists structures it is better
 // to use https://pkg.go.dev/container/list
 type DoublyLinkedList[T comparable] struct {
-	root   DoublyLinkedNode[T]
+	root   Node[T]
 	length int
 }
 
-// NewDoublyLikedList create a new doubly linked list.
-func NewDoublyLikedList[T comparable]() *DoublyLinkedList[T] {
+// New create a new doubly linked list.
+func New[T comparable]() *DoublyLinkedList[T] {
 	li := &DoublyLinkedList[T]{}
 	li.root.next = &li.root
 	li.root.prev = &li.root
@@ -44,8 +43,8 @@ func NewDoublyLikedList[T comparable]() *DoublyLinkedList[T] {
 }
 
 // PushBack pushes the value to the end of the list.
-func (li *DoublyLinkedList[T]) PushBack(val T) *DoublyLinkedNode[T] {
-	node := &DoublyLinkedNode[T]{
+func (li *DoublyLinkedList[T]) PushBack(val T) *Node[T] {
+	node := &Node[T]{
 		Value: val,
 		list:  li,
 	}
@@ -53,15 +52,15 @@ func (li *DoublyLinkedList[T]) PushBack(val T) *DoublyLinkedNode[T] {
 }
 
 // PushFront pushes the value to the beginning of the list.
-func (li *DoublyLinkedList[T]) PushFront(val T) *DoublyLinkedNode[T] {
-	node := &DoublyLinkedNode[T]{
+func (li *DoublyLinkedList[T]) PushFront(val T) *Node[T] {
+	node := &Node[T]{
 		Value: val,
 		list:  li,
 	}
 	return li.insertValue(node, &li.root)
 }
 
-func (li *DoublyLinkedList[T]) insertValue(node, at *DoublyLinkedNode[T]) *DoublyLinkedNode[T] {
+func (li *DoublyLinkedList[T]) insertValue(node, at *Node[T]) *Node[T] {
 	node.prev = at
 	node.next = at.next
 	node.prev.next = node
@@ -71,7 +70,7 @@ func (li *DoublyLinkedList[T]) insertValue(node, at *DoublyLinkedNode[T]) *Doubl
 }
 
 // Front gets the node from the front of the list.
-func (li *DoublyLinkedList[T]) Front() *DoublyLinkedNode[T] {
+func (li *DoublyLinkedList[T]) Front() *Node[T] {
 	if li.length == 0 {
 		return nil
 	}
@@ -79,7 +78,7 @@ func (li *DoublyLinkedList[T]) Front() *DoublyLinkedNode[T] {
 }
 
 // Back gets the node from the back of the list.
-func (li *DoublyLinkedList[T]) Back() *DoublyLinkedNode[T] {
+func (li *DoublyLinkedList[T]) Back() *Node[T] {
 	if li.length == 0 {
 		return nil
 	}
@@ -88,7 +87,7 @@ func (li *DoublyLinkedList[T]) Back() *DoublyLinkedNode[T] {
 
 // FindByValue searches by value the first found element in
 // forwards direction. If not found the nil is returned.
-func (li *DoublyLinkedList[T]) FindByValue(cmp T) *DoublyLinkedNode[T] {
+func (li *DoublyLinkedList[T]) FindByValue(cmp T) *Node[T] {
 	for node := li.Front(); node != nil; node = node.Next() {
 		if node.Value == cmp {
 			return node
@@ -98,7 +97,7 @@ func (li *DoublyLinkedList[T]) FindByValue(cmp T) *DoublyLinkedNode[T] {
 }
 
 // Remove deletes node from the list.
-func (li *DoublyLinkedList[T]) Remove(node *DoublyLinkedNode[T]) *DoublyLinkedNode[T] {
+func (li *DoublyLinkedList[T]) Remove(node *Node[T]) *Node[T] {
 	if node == nil {
 		return nil
 	}
@@ -112,7 +111,7 @@ func (li *DoublyLinkedList[T]) Remove(node *DoublyLinkedNode[T]) *DoublyLinkedNo
 }
 
 // RemoveFront remove the node from the front of the list.
-func (li *DoublyLinkedList[T]) RemoveFront() *DoublyLinkedNode[T] {
+func (li *DoublyLinkedList[T]) RemoveFront() *Node[T] {
 	node := li.root.next
 	if node == &li.root {
 		return nil
@@ -122,7 +121,7 @@ func (li *DoublyLinkedList[T]) RemoveFront() *DoublyLinkedNode[T] {
 }
 
 // RemoveBack remove the node from the front of the list.
-func (li *DoublyLinkedList[T]) RemoveBack() *DoublyLinkedNode[T] {
+func (li *DoublyLinkedList[T]) RemoveBack() *Node[T] {
 	node := li.root.prev
 	if node == &li.root {
 		return nil
