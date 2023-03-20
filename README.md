@@ -30,9 +30,10 @@ Go has some built-in data structures out of box.
 
 ## Algorithms
 
+* Balanced brackets
+* Factorial
 * Stocks problem
 * Postfix notation
-* Balanced brackets
 
 # TODO
 
