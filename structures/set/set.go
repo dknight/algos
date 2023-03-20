@@ -65,7 +65,7 @@ func (s Set[T]) Empty() bool {
 // String represents set as a string.
 func (s Set[T]) String() string {
 	var b strings.Builder
-	for _, v := range s.All() {
+	for _, v := range s.Values() {
 		fmt.Fprintf(&b, " %v", v)
 	}
 	str := b.String()
