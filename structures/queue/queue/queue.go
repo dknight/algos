@@ -1,5 +1,5 @@
-// Package queue presents the queue abstract data structure and basic
-// operations with it.
+// Package queue represents the FIFO (First In First Out) queue abstract data
+// structure and basic operations with it.
 package queue
 
 // Queue represents the queue structure.
@@ -17,8 +17,9 @@ func (q *Queue[T]) Enqueue(v T) T {
 	return v
 }
 
-// Dequeue remove an element the beginning of the queue and returns dequeued
-// element. Before dequeing it is practice to check is queue is empty or not.
+// Dequeue removes an element from the beginning of the queue and returns
+// dequeued element. Before operation it is a good practice to check is queue
+// is empty or not.
 //
 //	queue := queue.New[any]()
 //	if !queue.Empty() {

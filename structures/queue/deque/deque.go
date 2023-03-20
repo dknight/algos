@@ -1,6 +1,7 @@
-// Package deque presents the deque abstract data structure and basic
-// operations with it. Deque is similar to queue, but elements can be inserted
-// and remove as from the start and from the end.
+// Package deque represents deque abstract data structure and basic
+// operations on it. Deque is similar to queue, but elements can be inserted
+// and removed from the start and from the end.
+//
 // Actually deque is the generalized structure of all types of queues.
 package deque
 
@@ -19,7 +20,7 @@ func (d *Deque[T]) PushBack(v T) T {
 }
 
 // PopBack pops out an element from the end of the deque and returns popped
-// element. Before pop it is a good  practice to check is deque is empty or
+// element. Before pop it is a good practice to check is deque is empty or
 // not.
 //
 //	deque := deque.New[any]()
@@ -43,8 +44,8 @@ func (d *Deque[T]) PushFront(v T) T {
 	return v
 }
 
-// PopFront pops out eleme from the front of the deque and returns popped
-// element. Before pop it is a good  practice to check is deque is empty or
+// PopFront pops out an element from the front of the deque and returns popped
+// element. Before pop it is a good practice to check is deque is empty or
 // not.
 //
 //	deque := deque.New[any]()
@@ -61,12 +62,12 @@ func (d *Deque[T]) PopFront() T {
 	return ret
 }
 
-// Front returns the front (first element) of the deque.
+// Front returns the front (first) element of the deque.
 func (d *Deque[T]) Front() T {
 	return (*d)[0]
 }
 
-// Back returns the back (last element) of the deque.
+// Back returns the back (last) element of the deque.
 func (d *Deque[T]) Back() T {
 	return (*d)[len(*d)-1]
 }
