@@ -22,13 +22,15 @@ Go has some built-in data structures out of box.
 
 ## Data structures
 
-* Set
-* Stack
+* Graphs
+    - Undirected Graph (BFS, DFS)
 * Lists
     - Linked List
     - Doubly Linked List (unfinished)
 * Queues
     - Queue
+* Set
+* Stack
 
 ## Algorithms
 
