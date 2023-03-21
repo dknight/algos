@@ -4,6 +4,7 @@ package set
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -43,6 +44,11 @@ func (s Set[T]) Clear() {
 	}
 }
 
+// Keys returns slice of set's keys. Alias of Values().
+func (s Set[T]) Keys() []T {
+	return s.Values()
+}
+
 // Values returns all values of the set. Values are in indeterminate order.
 func (s Set[T]) Values() []T {
 	ret := make([]T, 0, len(s))
@@ -50,6 +56,16 @@ func (s Set[T]) Values() []T {
 		ret = append(ret, k)
 	}
 	return ret
+}
+
+// OrderedKeys returns the keys in order, if possible to compare them.
+// If keys cannot be compare, program will panic.
+func (s Set[T]) OrderedKeys() []T {
+	keys := s.Keys()
+	sort.Slice(keys, func(i, j int) bool {
+		return keys[i] != keys[j]
+	})
+	return keys
 }
 
 // Len returns the length of the set.

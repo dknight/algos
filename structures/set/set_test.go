@@ -118,6 +118,37 @@ func TestSet(t *testing.T) {
 		if !reflect.DeepEqual(got, exp) {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
+		keys := set.Keys()
+		sort.Slice(keys, func(i, j int) bool {
+			return keys[i] < keys[j]
+		})
+		if !reflect.DeepEqual(keys, exp) {
+			t.Errorf("Expected %v got %v", exp, keys)
+		}
+	})
+
+	t.Run("OrderedKeys()", func(t *testing.T) {
+		set := New[string]()
+		set.Add("BBAA")
+		set.Add("ABBA")
+		set.Add("Xyzzy")
+		set.Add("Colin")
+		set.Add("Hello")
+		set.Add("Diablo")
+		set.Add("BABA")
+		set.Add("World")
+		exp := []string{
+			"ABBA", "BABA", "BBAA",
+			"Colin", "Diablo", "Hello",
+			"World", "Xyzzy",
+		}
+		got := set.OrderedKeys()
+		sort.Slice(got, func(i, j int) bool {
+			return got[i] < got[j]
+		})
+		if !reflect.DeepEqual(got, exp) {
+			t.Errorf("Expected %v got %v", exp, got)
+		}
 	})
 
 	t.Run("String()", func(t *testing.T) {
