@@ -16,6 +16,22 @@ func assertPanic(t *testing.T, fn func()) {
 }
 
 func TestUndirectedGraph(t *testing.T) {
+	graph := NewUndirectedGraph[string]()
+	graph.AddEdge("A", "B")
+	graph.AddEdge("A", "D")
+	graph.AddEdge("B", "C")
+	graph.AddEdge("B", "D")
+	graph.AddEdge("C", "D")
+	graph.AddEdge("C", "G")
+	graph.AddEdge("D", "E")
+	graph.AddEdge("E", "D")
+	graph.AddEdge("E", "F")
+	graph.AddEdge("F", "G")
+	graph.AddEdge("G", "H")
+	graph.AddEdge("H", "I")
+	graph.AddEdge("H", "J")
+	graph.AddEdge("J", "K")
+
 	t.Run("NewUndirectedGraph()", func(t *testing.T) {
 		graph := NewUndirectedGraph[int]()
 		if graph == nil {
@@ -36,26 +52,9 @@ func TestUndirectedGraph(t *testing.T) {
 		if exp != got {
 			t.Errorf("Expected %v got %v", exp, got)
 		}
-
 	})
 
 	t.Run("DFS()", func(t *testing.T) {
-		graph := NewUndirectedGraph[string]()
-		graph.AddEdge("A", "B")
-		graph.AddEdge("A", "D")
-		graph.AddEdge("B", "C")
-		graph.AddEdge("B", "D")
-		graph.AddEdge("C", "D")
-		graph.AddEdge("C", "G")
-		graph.AddEdge("D", "E")
-		graph.AddEdge("E", "D")
-		graph.AddEdge("E", "F")
-		graph.AddEdge("F", "G")
-		graph.AddEdge("G", "H")
-		graph.AddEdge("H", "I")
-		graph.AddEdge("H", "J")
-		graph.AddEdge("J", "K")
-
 		exp := []string{"A", "B", "C", "G", "H", "I", "J", "K", "D", "E", "F"}
 		got := graph.DFS("A")
 		if !reflect.DeepEqual(exp, got) {
@@ -63,29 +62,13 @@ func TestUndirectedGraph(t *testing.T) {
 		}
 		// fmt.Println(got)
 
-		graph = NewUndirectedGraph[string]()
+		graphEmpty := NewUndirectedGraph[string]()
 		assertPanic(t, func() {
-			got = graph.DFS("A")
+			got = graphEmpty.DFS("A")
 		})
 	})
 
 	t.Run("BFS()", func(t *testing.T) {
-		graph := NewUndirectedGraph[string]()
-		graph.AddEdge("A", "B")
-		graph.AddEdge("A", "D")
-		graph.AddEdge("B", "C")
-		graph.AddEdge("B", "D")
-		graph.AddEdge("C", "D")
-		graph.AddEdge("C", "G")
-		graph.AddEdge("D", "E")
-		graph.AddEdge("E", "D")
-		graph.AddEdge("E", "F")
-		graph.AddEdge("F", "G")
-		graph.AddEdge("G", "H")
-		graph.AddEdge("H", "I")
-		graph.AddEdge("H", "J")
-		graph.AddEdge("J", "K")
-
 		exp := []string{"A", "D", "B", "E", "C", "F", "G", "H", "J", "I", "K"}
 		got := graph.BFS("A")
 		if !reflect.DeepEqual(exp, got) {
@@ -93,9 +76,10 @@ func TestUndirectedGraph(t *testing.T) {
 		}
 		// fmt.Println(got)
 
-		graph = NewUndirectedGraph[string]()
+		graphEmpty := NewUndirectedGraph[string]()
 		assertPanic(t, func() {
-			got = graph.BFS("A")
+			got = graphEmpty.BFS("A")
 		})
 	})
+
 }

@@ -1,8 +1,8 @@
-github.com/dknight/algos/structures/list/llist v0.0.0-20230320212614-6de2b4390d2c h1:GRdrzOOrPSS6beeGEPTOt6WoM0ZTzujV1zfkrou+oEc=
-github.com/dknight/algos/structures/list/llist v0.0.0-20230320212614-6de2b4390d2c/go.mod h1:dX5EQDiDgbf9S+RTspz5VFoCuLXcHcKxWW8i2aKdz+g=
-github.com/dknight/algos/structures/queue/queue v0.0.0-20230320213712-89bd60a48185 h1:YseO79S+dLpLH4OKvHjogmSS0OkppzYWNRVCp5IQQlE=
-github.com/dknight/algos/structures/queue/queue v0.0.0-20230320213712-89bd60a48185/go.mod h1:Endg7DxJ7cN7R+O+gx9obs5dgxvMqzU8OYEo5SMwwx0=
-github.com/dknight/algos/structures/set v0.0.0-20230320212614-6de2b4390d2c h1:lgi+8VSHI/l0GK504lhofDgVLoiXHH6Btd3+QqhLDlk=
-github.com/dknight/algos/structures/set v0.0.0-20230320212614-6de2b4390d2c/go.mod h1:FLa3oTrM3MgGpOjOcH9XKlQ3CasSMa6YyR+pejd4hRY=
-github.com/dknight/algos/structures/stack v0.0.0-20230320212614-6de2b4390d2c h1:Naho8fgXrONY7fqTFHVO9vyeLttByTFppf6vDW9k/4I=
-github.com/dknight/algos/structures/stack v0.0.0-20230320212614-6de2b4390d2c/go.mod h1:wxPT4/vBtxaWJdX5VUHKoO8/a5SvljXVoFYUFQquMvQ=
+github.com/dknight/algos/structures/list/llist v0.0.0-20230321194222-d291317c28e9 h1:16ov8R+UM6PiE/MShYokAeMEQlV3bMcy+bgDK2Oxr34=
+github.com/dknight/algos/structures/list/llist v0.0.0-20230321194222-d291317c28e9/go.mod h1:dX5EQDiDgbf9S+RTspz5VFoCuLXcHcKxWW8i2aKdz+g=
+github.com/dknight/algos/structures/queue/queue v0.0.0-20230321194222-d291317c28e9 h1:x7QzGhgnM/oOylYFNJ2LacPJQlQmmplD+wrGrE4Kei8=
+github.com/dknight/algos/structures/queue/queue v0.0.0-20230321194222-d291317c28e9/go.mod h1:Endg7DxJ7cN7R+O+gx9obs5dgxvMqzU8OYEo5SMwwx0=
+github.com/dknight/algos/structures/set v0.0.0-20230321194222-d291317c28e9 h1:/Wb7+0VAqsS7SQk5u241YOxXnj5jnswz3udz23a4Q6A=
+github.com/dknight/algos/structures/set v0.0.0-20230321194222-d291317c28e9/go.mod h1:FLa3oTrM3MgGpOjOcH9XKlQ3CasSMa6YyR+pejd4hRY=
+github.com/dknight/algos/structures/stack v0.0.0-20230321194222-d291317c28e9 h1:d31JakySKVIYotZ8WB+ZYwHwWmzvrlqdU98GyDx0htQ=
+github.com/dknight/algos/structures/stack v0.0.0-20230321194222-d291317c28e9/go.mod h1:wxPT4/vBtxaWJdX5VUHKoO8/a5SvljXVoFYUFQquMvQ=
