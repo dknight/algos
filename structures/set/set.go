@@ -4,7 +4,6 @@ package set
 
 import (
 	"fmt"
-	"sort"
 	"strings"
 )
 
@@ -56,16 +55,6 @@ func (s Set[T]) Values() []T {
 		ret = append(ret, k)
 	}
 	return ret
-}
-
-// OrderedKeys returns the keys in order, if possible to compare them.
-// If keys cannot be compare, program will panic.
-func (s Set[T]) OrderedKeys() []T {
-	keys := s.Keys()
-	sort.Slice(keys, func(i, j int) bool {
-		return keys[i] != keys[j]
-	})
-	return keys
 }
 
 // Len returns the length of the set.
