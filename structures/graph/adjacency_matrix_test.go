@@ -7,7 +7,7 @@ import (
 
 func TestAdjancencyMatrix(t *testing.T) {
 	t.Run("AdjancencyMatrix()", func(t *testing.T) {
-		gr := NewUndirectedGraph[string]()
+		gr := NewGraph[string]()
 		gr.AddEdge("A", "B")
 		gr.AddEdge("A", "C")
 		gr.AddEdge("C", "D")

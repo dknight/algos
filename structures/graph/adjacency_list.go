@@ -7,7 +7,7 @@ import (
 	"github.com/dknight/algos/structures/list/llist"
 )
 
-const arrSep = " --> "
+const arrSep = " -> "
 
 // AdjacencyList represents the adjacency list of the undirected graph.
 type AdjacencyList[T comparable] map[T]*llist.LinkedList[T]
